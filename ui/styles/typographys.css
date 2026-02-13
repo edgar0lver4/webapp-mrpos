@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  /* ---------------- TITLES ---------------- */
+  .heading-xl {
+    @apply font-primary text-title-xl;
+  }
+
+  .heading-lg {
+    @apply font-primary text-title-lg;
+  }
+
+  .heading-md {
+    @apply font-primary text-title-md;
+  }
+
+  /* ---------------- SUBTITLES ---------------- */
+  .subheading-lg {
+    @apply font-subtitle text-subtitle-lg;
+  }
+
+  .subheading {
+    @apply font-subtitle text-subtitle;
+  }
+
+  /* ---------------- BODY ---------------- */
+  .description-body {
+    @apply font-secondary text-body;
+    font-weight: 400;
+    line-height: 1.65;
+    letter-spacing: 0em;
+  }
+
+  .description-body-semibold {
+    @apply font-secondary text-body;
+    font-weight: 600;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+  }
+
+  .description-body-bold {
+    @apply font-secondary text-body;
+    font-weight: 700;
+    line-height: 1.55;
+    letter-spacing: -0.015em;
+  }
+
+  .text-body-lg {
+    @apply font-secondary text-body-lg;
+  }
+
+  .description-body-sm {
+    @apply font-secondary text-body-sm;
+  }
+}

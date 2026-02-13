@@ -19,7 +19,41 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@app/*": [
+        "./app/*",
+        "../app/*",
+        "../../app/*",
+        "../../../app/*",
+        "../../../../app/*"
+      ],
+      "@core/*": [
+        "./core/*",
+        "../core/*",
+        "../../core/*",
+        "../../../core/*",
+        "../../../../core/*"
+      ],
+      "@application/*": [
+        "./application/*",
+        "../application/*",
+        "../../application/*",
+        "../../../application/*",
+        "../../../../application/*"
+      ],
+      "@infraestructure/*": [
+        "./infraestructure/*",
+        "../infraestructure/*",
+        "../../infraestructure/*",
+        "../../../infraestructure/*",
+        "../../../../infraestructure/*"
+      ],
+      "@ui/*": [
+        "./ui/*",
+        "../ui/*",
+        "../../ui/*",
+        "../../../ui/*",
+        "../../../../ui/*"
+      ]
     }
   },
   "include": [
