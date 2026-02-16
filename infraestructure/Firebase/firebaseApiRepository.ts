@@ -28,7 +28,7 @@ export class FirebaseApiRepository implements FirebaseRepository {
     this.collectionRef = collection(this.db, root, ...segments);
   }
   async createNewDocument(body: any): Promise<void> {
-    const nowMexico = dayjs().tz("America/Mexico_City").toDate();
+    const nowMexico = dayjs().tz("America/Mexico_City").toDate().toISOString();
     try {
       const payload = {
         ...body,
@@ -79,7 +79,7 @@ export class FirebaseApiRepository implements FirebaseRepository {
     }
   }
   async updateDocument(body: any): Promise<void> {
-    const nowMexico = dayjs().tz("America/Mexico_City").toDate();
+    const nowMexico = dayjs().tz("America/Mexico_City").toDate().toISOString();
     try {
       const payload = {
         ...body,

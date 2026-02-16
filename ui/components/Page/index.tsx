@@ -7,7 +7,7 @@ export const PageContainer = ({ children, titleText }: Props) => {
       <Head>
         <title>{titleText}</title>
       </Head>
-      <div className="mt-4 ml-4">{children}</div>
+      <div className="mt-4 mx-4">{children}</div>
     </>
   );
 };
