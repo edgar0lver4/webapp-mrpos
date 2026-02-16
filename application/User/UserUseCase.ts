@@ -9,4 +9,11 @@ export class UserUseCase {
   async getUserByEmail(email: string): Promise<User> {
     return this.apiRepository.getUserByEmail(email);
   }
+
+  async getUserByEmailAndPassword(
+    email: string,
+    password: string
+  ): Promise<User> {
+    return this.apiRepository.getUserByEmailAndPassword(email, password);
+  }
 }

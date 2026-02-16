@@ -1,5 +1,4 @@
 import { ProfileUseCase } from "@application/Profile/ProfileUseCases";
-import { SecurityUseCases } from "@application/Security/SecurityUseCases";
 import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (req: NextRequest) => {
@@ -8,12 +7,11 @@ export const POST = async (req: NextRequest) => {
     const token = headers.get("authorization");
     const split = token?.split(" ");
     const jwt = split?.[1];
-    console.log(jwt);
     if (jwt) {
       const profileUseCase = new ProfileUseCase();
-      await profileUseCase.terminateRegister(jwt);
+      const sessionToken = await profileUseCase.terminateRegister(jwt);
 
-      return NextResponse.json(
+      const res = NextResponse.json(
         {
           message: "Configuración de carta finalizada",
         },
@@ -21,6 +19,15 @@ export const POST = async (req: NextRequest) => {
           status: 200,
         }
       );
+
+      res.cookies.set("token", sessionToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        path: "/",
+        maxAge: 60 * 60 * 24,
+      });
+
+      return res;
     }
     return NextResponse.json(
       {

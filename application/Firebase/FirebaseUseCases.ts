@@ -1,4 +1,9 @@
 import { FirebaseApiRepository } from "@infraestructure/Firebase/firebaseApiRepository";
+import {
+  QueryCompositeFilterConstraint,
+  QueryConstraint,
+  QueryNonFilterConstraint,
+} from "firebase/firestore";
 
 export class FirebaseUseCases {
   protected apiRepository: FirebaseApiRepository;
@@ -15,8 +20,15 @@ export class FirebaseUseCases {
   async update(body: any) {
     return this.apiRepository.updateDocument(body);
   }
-
-  async get<T>(where?: any) {
-    return this.apiRepository.getDocument(where) as T;
+  async get<T>(...queryConstraints: QueryConstraint[]): Promise<Array<T>>;
+  async get<T>(
+    compositeFilters: QueryCompositeFilterConstraint,
+    ...queryNonFilterConstraint: QueryNonFilterConstraint[]
+  ): Promise<Array<T>>;
+  async get<T>(
+    first?: QueryConstraint | QueryCompositeFilterConstraint,
+    ...rest: any[]
+  ): Promise<Array<T>> {
+    return this.apiRepository.getDocument(first as any, ...rest);
   }
 }

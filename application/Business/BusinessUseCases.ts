@@ -12,4 +12,7 @@ export class BusinessUseCases {
   async createBusiness(business: Business): Promise<Business> {
     return this.apiRepository.createBusiness(business);
   }
+  async getBusiness(): Promise<Business> {
+    return this.apiRepository.getBusiness();
+  }
 }

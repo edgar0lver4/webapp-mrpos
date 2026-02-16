@@ -31,7 +31,7 @@ export class SecurityApiRepository implements ISecurityRepository {
 
   generateJWT(body: any): string {
     try {
-      const token = jwt.sign(body, this.JWT_SECRET);
+      const token = jwt.sign(body, this.JWT_SECRET, { expiresIn: "1d" });
       return token;
     } catch (e) {
       console.log("Error al generar el JWT:", e);

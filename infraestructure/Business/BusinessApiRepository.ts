@@ -6,6 +6,7 @@ import {
   BusinessType,
 } from "@core/Business/domain";
 import { DB_CORE_NAMES } from "@core/Database/Core";
+import { where } from "firebase/firestore";
 
 export class BusinessApiRepository implements BusinessRepository {
   protected userId;
@@ -14,7 +15,8 @@ export class BusinessApiRepository implements BusinessRepository {
   constructor(userId: string) {
     this.userId = userId;
     this.security = new SecurityUseCases();
-    this.dbController = new FirebaseUseCases(DB_CORE_NAMES.BUSINESS);
+    const dbName = `${DB_CORE_NAMES.BUSINESS}/${userId}`;
+    this.dbController = new FirebaseUseCases(dbName);
   }
 
   async createDefaultBusiness(name: string): Promise<Business> {
@@ -32,6 +34,16 @@ export class BusinessApiRepository implements BusinessRepository {
     try {
       await this.dbController.insert(business);
       return business;
+    } catch (e) {
+      throw new Error("Error al crear el negocio");
+    }
+  }
+
+  async getBusiness(): Promise<Business> {
+    try {
+      const query = where("userId", "==", this.userId);
+      const business = await this.dbController.get<Business>(query);
+      return business?.[0];
     } catch (e) {
       throw new Error("Error al crear el negocio");
     }

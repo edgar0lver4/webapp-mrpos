@@ -1,6 +1,5 @@
 import { SecurityUseCases } from "@application/Security/SecurityUseCases";
 import { User } from "@core/User/domain";
-import Image from "next/image";
 import { GeneratorProfileComp } from "./generatorView";
 
 const FinishRegisterPage = async ({

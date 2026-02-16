@@ -1,14 +1,26 @@
 @import "tailwindcss";
 @import "./typographys.css";
+@import "./loaders.css";
 
-:root  {
+:root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary-o: #e66d00;
+  --default: #2563eb;
+  --default-black: #0f172a;
+  --default-afable: #e0f2fe;
+  --default-shine: #38bdf8;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary-o: var(--primary-o);
+  --color-default: var(--default);
+  --color-default-black: var(--default-black);
+  --color-default-afable: var(--default-afable);
+  --color-default-shine: var(--default-shine);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 

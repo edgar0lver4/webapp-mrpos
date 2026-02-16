@@ -11,6 +11,9 @@ import {
   getDocs,
   getFirestore,
   query,
+  QueryCompositeFilterConstraint,
+  QueryConstraint,
+  QueryNonFilterConstraint,
   updateDoc,
 } from "firebase/firestore";
 
@@ -31,24 +34,34 @@ export class FirebaseApiRepository implements FirebaseRepository {
       throw Error("Error al guardar en información en la base de datos");
     }
   }
-  async getDocument<T>(where?: any): Promise<DocumentData | Array<T>> {
+  async getDocument<T>(
+    ...queryConstraints: QueryConstraint[]
+  ): Promise<Array<T>>;
+  async getDocument<T>(
+    compositeFilters: QueryCompositeFilterConstraint,
+    ...queryNonFilterConstraint: QueryNonFilterConstraint[]
+  ): Promise<Array<T>>;
+  async getDocument<T>(
+    first?: QueryConstraint | QueryCompositeFilterConstraint,
+    ...rest: any[]
+  ): Promise<Array<T>> {
     try {
-      const elements: any[] = [];
-      const queryDoc = where
-        ? query(this.collectionRef, where)
-        : query(this.collectionRef);
-      const docSnap = await getDocs(queryDoc);
-      if (docSnap.size > 0) {
-        docSnap.forEach((doc) => elements.push(doc.data()));
-        return elements;
+      const elements: T[] = [];
+      let queryDoc;
+      if (first) {
+        queryDoc = query(this.collectionRef, first as any, ...rest);
       } else {
-        return [];
+        queryDoc = query(this.collectionRef);
       }
+      const docSnap = await getDocs(queryDoc);
+      docSnap.forEach((doc) => elements.push(doc.data() as T));
+      return elements;
     } catch (e) {
-      console.log("Error:", e);
-      throw Error("Error al obtener en información en la base de datos");
+      console.error("Error al obtener documento fire20005");
+      return [];
     }
   }
+
   async deleteDocument(body: any): Promise<void> {
     const newBody = { ...body, isDeleted: true };
     try {

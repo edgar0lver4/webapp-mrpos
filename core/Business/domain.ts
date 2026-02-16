@@ -28,4 +28,5 @@ export type Business = {
 export interface BusinessRepository {
   createDefaultBusiness(name: string): Promise<Business>;
   createBusiness(business: Business): Promise<Business>;
+  getBusiness(): Promise<Business>;
 }

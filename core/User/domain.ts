@@ -18,4 +18,5 @@ export type User = {
 
 export interface UserRepository {
   getUserByEmail(email: string): Promise<User>;
+  getUserByEmailAndPassword(email: string, password: string): Promise<User>;
 }
