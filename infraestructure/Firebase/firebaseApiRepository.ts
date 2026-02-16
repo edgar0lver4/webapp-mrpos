@@ -16,6 +16,7 @@ import {
   QueryNonFilterConstraint,
   updateDoc,
 } from "firebase/firestore";
+import dayjs from "@libs/dayjs";
 
 export class FirebaseApiRepository implements FirebaseRepository {
   protected app: FirebaseApp;
@@ -27,8 +28,14 @@ export class FirebaseApiRepository implements FirebaseRepository {
     this.collectionRef = collection(this.db, root, ...segments);
   }
   async createNewDocument(body: any): Promise<void> {
+    const nowMexico = dayjs().tz("America/Mexico_City").toDate();
     try {
-      await addDoc(this.collectionRef, body);
+      const payload = {
+        ...body,
+        createAt: nowMexico,
+        updateAt: nowMexico,
+      };
+      await addDoc(this.collectionRef, payload);
     } catch (e) {
       console.log("Error:", e);
       throw Error("Error al guardar en información en la base de datos");
@@ -72,8 +79,13 @@ export class FirebaseApiRepository implements FirebaseRepository {
     }
   }
   async updateDocument(body: any): Promise<void> {
+    const nowMexico = dayjs().tz("America/Mexico_City").toDate();
     try {
-      await updateDoc(doc(this.collectionRef), body);
+      const payload = {
+        ...body,
+        updateAt: nowMexico,
+      };
+      await updateDoc(doc(this.collectionRef), payload);
     } catch (e) {
       console.log("Error:", e);
       throw Error("Error al actualizar en información en la base de datos");

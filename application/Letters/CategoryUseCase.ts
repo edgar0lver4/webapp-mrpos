@@ -3,13 +3,16 @@ import { CategoryApiRepository } from "@infraestructure/Letter/CategoryApiReposi
 
 export class CategoryUseCase {
   protected apiRepository: CategoryRepository;
-  constructor(uniqueId: string) {
-    this.apiRepository = new CategoryApiRepository(uniqueId);
+  constructor(businessId: string) {
+    this.apiRepository = new CategoryApiRepository(businessId);
   }
   async createCategory(name: string): Promise<Category> {
     return this.apiRepository.createCategory(name);
   }
   async updateCategory(category: Category): Promise<Category> {
     return this.apiRepository.updateCategory(category);
+  }
+  async getAllCategories(): Promise<Category[]> {
+    return this.apiRepository.getAllCategories();
   }
 }

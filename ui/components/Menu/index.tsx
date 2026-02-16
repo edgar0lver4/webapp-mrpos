@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { version } from "../../../package.json";
+import Link from "next/link";
 
 export const Menu = () => {
   return (
@@ -10,7 +11,11 @@ export const Menu = () => {
           Version:{version}
         </p>
       </div>
-      <div></div>
+      <div className="flex flex-col">
+        <Link href={"/"}>Inicio</Link>
+        <Link href={"/orders"}>Ordenes</Link>
+        <Link href={"/categories"}>Menu</Link>
+      </div>
     </div>
   );
 };

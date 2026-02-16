@@ -27,7 +27,9 @@ export class ProfileApiRepository implements ProfileRepository {
       const categoryController = new CategoryUseCase(createBusiness.uniqueId);
       const category = await categoryController.createCategory(DEFAULT_NAME);
       const letterController = new LettersUseCase(category.uniqueId);
+      const letterId = this.security.generateRandomId();
       await letterController.createLetter({
+        letterId,
         categoryId: category.uniqueId,
         isVariable: false,
         name: "Prueba",

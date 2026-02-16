@@ -4,7 +4,7 @@ import "../ui/styles/globals.css";
 import { cookies } from "next/headers";
 import { SecurityUseCases } from "@application/Security/SecurityUseCases";
 import { AuthWrapper } from "@ui/components/AuthWrapper";
-import { Head } from "next/document";
+import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -49,6 +49,7 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {isLoggin ? <AuthWrapper>{auth}</AuthWrapper> : anonym}
+        <Analytics />
       </body>
     </html>
   );

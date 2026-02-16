@@ -1,12 +1,14 @@
 export type Category = {
   name: string;
   uniqueId: string;
+  businessId: string;
 };
 export type Letter = {
   name: string;
   price: number;
   categoryId: string;
   isVariable: boolean;
+  letterId: string;
 };
 
 export interface LetterRepository {
@@ -14,6 +16,7 @@ export interface LetterRepository {
 }
 
 export interface CategoryRepository {
+  getAllCategories(): Promise<Category[]>;
   createCategory(name: string): Promise<Category>;
   updateCategory(category: Category): Promise<Category>;
 }
