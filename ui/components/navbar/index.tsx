@@ -1,9 +1,10 @@
 "use client";
-import { Divider } from "@mui/material";
+import { Avatar, Divider } from "@mui/material";
 import { Badge } from "../Badge";
 import { FaSignOutAlt } from "react-icons/fa";
 import { SessionService } from "@ui/services/Session";
 import { useRouter } from "next/navigation";
+import { deepOrange } from "@mui/material/colors";
 
 const Navbar = () => {
   const { push, refresh } = useRouter();
@@ -17,9 +18,11 @@ const Navbar = () => {
     <nav className="flex flex-row justify-end w-full px-4 py-2">
       <div className="flex flex-row mr-2">
         <div className="mr-2">
-          <p>ProfileImage</p>
+          <Avatar sx={{ bgcolor: deepOrange[500] }}>N</Avatar>
         </div>
-        <Badge variant="default">Gratis</Badge>
+        <div>
+          <Badge variant="default">Gratis</Badge>
+        </div>
       </div>
       <Divider orientation="vertical" variant="middle" flexItem />
       <button onClick={handleLogout} className="flex flex-row gap-1 ml-2">

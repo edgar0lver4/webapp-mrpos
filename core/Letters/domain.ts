@@ -3,6 +3,11 @@ export type Category = {
   uniqueId: string;
   businessId: string;
 };
+
+export type CategoryRequest = {
+  name: string;
+};
+
 export type Letter = {
   name: string;
   price: number;
@@ -13,10 +18,12 @@ export type Letter = {
 
 export interface LetterRepository {
   createLetter(val: Letter): Promise<void>;
+  getAll(): Promise<Letter[]>;
 }
 
 export interface CategoryRepository {
   getAllCategories(): Promise<Category[]>;
   createCategory(name: string): Promise<Category>;
   updateCategory(category: Category): Promise<Category>;
+  deleteCategory(id: string): Promise<void>;
 }

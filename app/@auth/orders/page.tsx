@@ -1,8 +1,4 @@
-import { CategoryUseCase } from "@application/Letters/CategoryUseCase";
-import { SecurityUseCases } from "@application/Security/SecurityUseCases";
-import { ProfileSession } from "@core/Profile/domain";
 import { PageContainer } from "@ui/components/Page";
-import { cookies } from "next/headers";
 
 const OrdersPage = async () => {
   return (

@@ -15,4 +15,7 @@ export class CategoryUseCase {
   async getAllCategories(): Promise<Category[]> {
     return this.apiRepository.getAllCategories();
   }
+  async deleteCategory(categoryId: string): Promise<void> {
+    return this.apiRepository.deleteCategory(categoryId);
+  }
 }

@@ -5,6 +5,7 @@ import {
   addDoc,
   collection,
   CollectionReference,
+  deleteDoc,
   doc,
   DocumentData,
   Firestore,
@@ -69,10 +70,24 @@ export class FirebaseApiRepository implements FirebaseRepository {
     }
   }
 
-  async deleteDocument(body: any): Promise<void> {
-    const newBody = { ...body, isDeleted: true };
+  async deleteDocument(...queryConstraints: QueryConstraint[]): Promise<void>;
+  async deleteDocument(
+    compositeFilters: QueryCompositeFilterConstraint,
+    ...queryNonFilterConstraint: QueryNonFilterConstraint[]
+  ): Promise<void>;
+  async deleteDocument(
+    first?: QueryConstraint | QueryCompositeFilterConstraint,
+    ...rest: any[]
+  ): Promise<void> {
     try {
-      await updateDoc(doc(this.collectionRef), newBody);
+      let queryDoc;
+      if (first) {
+        queryDoc = query(this.collectionRef, first as any, ...rest);
+      } else {
+        queryDoc = query(this.collectionRef);
+      }
+      const docSnap = await getDocs(queryDoc);
+      docSnap.forEach(async (doc) => await deleteDoc(doc.ref));
     } catch (e) {
       console.log("Error:", e);
       throw Error("Error al borrar en información en la base de datos");

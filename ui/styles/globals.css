@@ -7,20 +7,34 @@
   --background: #ffffff;
   --foreground: #171717;
   --primary-o: #e66d00;
+  --primary-o-shine: #f78e31;
   --default: #2563eb;
   --default-black: #0f172a;
   --default-afable: #e0f2fe;
   --default-shine: #38bdf8;
+  --error: #ad0303;
+  --error-afable: #c40e0e;
+  --error-dark: #910101;
+  --sucess: #41b015;
+  --sucess-afable: #51d41c;
+  --sucess-dark: #2a9101;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-primary-o: var(--primary-o);
+  --color-primary-o-shine: var(--primary-o-shine);
   --color-default: var(--default);
   --color-default-black: var(--default-black);
   --color-default-afable: var(--default-afable);
   --color-default-shine: var(--default-shine);
+  --color-error: var(--error);
+  --color-error-afable: var(--error-afable);
+  --color-error-dark: var(--error-dark);
+  --color-success: var(--sucess);
+  --color-success-afable: var(--sucess-afable);
+  --color-success-dark: var(--sucess-dark);
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);

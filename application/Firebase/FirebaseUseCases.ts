@@ -31,4 +31,16 @@ export class FirebaseUseCases {
   ): Promise<Array<T>> {
     return this.apiRepository.getDocument(first as any, ...rest);
   }
+
+  async delete(...queryConstraints: QueryConstraint[]): Promise<void>;
+  async delete(
+    compositeFilters: QueryCompositeFilterConstraint,
+    ...queryNonFilterConstraint: QueryNonFilterConstraint[]
+  ): Promise<void>;
+  async delete(
+    first?: QueryConstraint | QueryCompositeFilterConstraint,
+    ...rest: any[]
+  ): Promise<void> {
+    return this.apiRepository.deleteDocument(first as any, ...rest);
+  }
 }

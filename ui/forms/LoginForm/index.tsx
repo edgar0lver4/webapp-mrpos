@@ -14,10 +14,7 @@ export default function LoginForm() {
   const [loading, setLoading] = useState(false);
 
   const LoginSchema = Yup.object().shape({
-    email: Yup.string()
-      .email("Correo inválido")
-      .required("El correo es requerido"),
-
+    email: Yup.string().required("El usuario o correo es requerido"),
     password: Yup.string()
       .min(6, "Mínimo 6 caracteres")
       .required("La contraseña es requerida"),
@@ -59,7 +56,7 @@ export default function LoginForm() {
           >
             <TextField
               fullWidth
-              label="Correo"
+              label="Usuario o Correo"
               name="email"
               value={values.email}
               onChange={handleChange}

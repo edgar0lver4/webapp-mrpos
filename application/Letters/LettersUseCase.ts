@@ -6,7 +6,12 @@ export class LettersUseCase {
   constructor(categoryId: string) {
     this.apiRepository = new LetterApiRepository(categoryId);
   }
+
   async createLetter(val: Letter): Promise<void> {
     return this.apiRepository.createLetter(val);
+  }
+
+  async getAll(): Promise<Letter[]> {
+    return this.apiRepository.getAll();
   }
 }

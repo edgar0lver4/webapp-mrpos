@@ -2,6 +2,7 @@ import { FirebaseUseCases } from "@application/Firebase/FirebaseUseCases";
 import { SecurityUseCases } from "@application/Security/SecurityUseCases";
 import { DB_CORE_NAMES } from "@core/Database/Core";
 import { Category, CategoryRepository, Letter } from "@core/Letters/domain";
+import { where } from "firebase/firestore";
 
 export class CategoryApiRepository implements CategoryRepository {
   protected dbController;
@@ -40,7 +41,25 @@ export class CategoryApiRepository implements CategoryRepository {
   async getAllCategories(): Promise<Category[]> {
     try {
       const getAll = await this.dbController.get<Category>();
-      return getAll;
+      const order = getAll.sort((a, b) => {
+        if (a.name > b.name) {
+          return 1;
+        }
+        if (a.name < b.name) {
+          return -1;
+        }
+        return 0;
+      });
+      return order;
+    } catch (e) {
+      throw new Error("Error al obtener las categorias");
+    }
+  }
+
+  async deleteCategory(categoryId: string): Promise<void> {
+    try {
+      const query = where("uniqueId", "==", categoryId);
+      await this.dbController.delete(query);
     } catch (e) {
       throw new Error("Error al obtener las categorias");
     }
